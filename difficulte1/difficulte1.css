@@ -1,8 +1,17 @@
-tr, th {
+tr, td {
+    width: 15px;
+    height: 20px;
     border: solid;
     padding: 5px;
+    text-align: center;
 }
 
 table {
     border-spacing: 15px;
+}
+
+div {
+    border: solid;
+    width: 500px;
+    margin: auto;
 }
