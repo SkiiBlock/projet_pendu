@@ -1,0 +1,8 @@
+tr, th {
+    border: solid;
+    padding: 5px;
+}
+
+table {
+    border-spacing: 15px;
+}
