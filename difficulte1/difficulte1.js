@@ -4,9 +4,6 @@ function requestXML(url, categorie) { //fonction => request un mot dans le XML
     
     xhttp.onreadystatechange = function() {
         
-        console.log(this.readyState);
-        console.log(this.status);
-        
         if (this.readyState == 4 && this.status == 200) {
             reponseXML(this, categorie);
         }
