@@ -12,10 +12,9 @@ window.onload = function init() {
     
     var ligne = tableau.insertRow(-1);
     for (var i=13; i<26; i++) {
-        var x=0;
+        var x=-1;
         var colonne = ligne.insertCell(x);
         colonne.innerHTML += alphabet[i];
-        x++
     }
 }
 
