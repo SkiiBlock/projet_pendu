@@ -18,21 +18,21 @@ window.onload = function init() {
     }
 }
 
-function requestXML(url, categorie) { //fonction => request un mot dans le XML
+function requestXML(url) { //fonction => request un mot dans le XML
     
     var xhttp = new XMLHttpRequest();
     
     xhttp.onreadystatechange = function() {
         
         if (this.readyState == 4 && this.status == 200) {
-            reponseXML(this, categorie);
+            responseText(this);
         }
     }
     xhttp.open('GET', url, true);
     xhttp.send();
 }
 
-function reponseXML(xhttp, categorie) {
+/*function reponseXML(xhttp, categorie) {
     
     var i = Math.floor(Math.random() * 6)
     var xml = xhttp.responseXML.getElementsByTagName(categorie)[0].getElementsByTagName('mot')[i].childNodes[0].nodeValue;
@@ -44,6 +44,20 @@ function reponseXML(xhttp, categorie) {
     console.log(mot);
     tableau(mot);
     
+}*/
+
+function responseText(xhttp) {
+    
+    var text = xhttp.responseText.split('\n');
+    xhttp.responseText = null;
+    var node = Math.floor(Math.random()*text.length);
+    text[node] = text[node].trim();
+    //console.log(text[node].length);
+    //console.log(text[node]);
+    var response = text[node].split('');
+    //console.log(response);
+    tableau(response);
+    
 }
 
 function tableau(mot) {
@@ -54,6 +68,6 @@ function tableau(mot) {
     
     for (var i=0; i<mot.length; i++) {
         var colonne = ligne.insertCell(i);
-        colonne.innerHTML += mot[i];
+        colonne.innerHTML += mot[i].toUpperCase();
     }
 }
