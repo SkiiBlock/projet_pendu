@@ -1,6 +1,7 @@
-	console.log("Chargement de Js : OK "); //Test du JavaScript
+			console.log("Chargement de Js : OK "); //Test du JavaScript
 
-function supprimer(supp, objet_id){  
+
+/*function supprimer(supp, objet_id){                        --- FONCTION FAIRE DISPARAITRE BOUTONS ---
 	
  	var elem=document.getElementById(supp);
 	//obj.style.width = '0px';
@@ -13,21 +14,27 @@ function supprimer(supp, objet_id){
 	elem.style.display = 'none';
 	
 	afficher(objet_id);
+}*/
+
+
+function afficher(id){                                /* -- Fonction affichage theme -- */
+	
+	console.log("Niveau selectionné : " + id);
+
+	for (var i = 1; i < 4; i++){
+		
+		
+		var elem2=document.getElementById("themesDifficulte"+ i);
+		elem2.style.display = 'none';
+		elem2.style.width = "0px" ;
+		
+	}
+	
+	var elem=document.getElementById("themesDifficulte"+ id);
+	elem.style.display = 'flex';
+	elem.style.width = "500px" ;
+
+	
 }
 
-function afficher(objet_id){
-	
-	console.log("Le niveau de difficulté est : " + objet_id);
-	
-}
-
-
-	
-	
-	
-	/*if (obj.style.display == 'inline-block') {
-		obj.style.display='none'
-	}else{
-		obj.style.display='block'
-	}*/
 
