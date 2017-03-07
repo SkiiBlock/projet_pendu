@@ -1,3 +1,4 @@
+
 body {
     background: url('fondEcran.png') repeat;
     background-size: 100%;
@@ -14,6 +15,8 @@ h1 {
 	margin-bottom: 0px;
 }
 
+
+
 .button {   /*boutons*/
   
   display: inline-block;
@@ -24,9 +27,11 @@ h1 {
   text-align: center;
   font-size: 30px;
   padding: 30px;
-  width: 300px;
   cursor: pointer; /*Changer la forme du curseur lors survole*/
   margin: 15px;
+  width: 300px;
+  outline: none;
+	
 }
 
 .button span { /*Texte dans bouton*/
@@ -55,14 +60,45 @@ h1 {
   right: 0;
 }
 
-#flex {
+
+.flex {
 	
 	display: flex;
-    text-align: center;
+	margin: auto;
 	flex-direction: column;
-	align-items: center;
-
+	justify-content: space-around;
+	transition: 1s; 
+		
 }
+
+#boite {
+	
+	display: flex;
+	margin: auto;
+	justify-content: space-around;
+	transition: 1s; 
+		
+}
+
+#themesDifficulte1 {
+		
+	display: none;
+	width: 0px;
+	
+}
+
+#themesDifficulte2 {
+		
+	display: none;
+	width: 0px;
+}
+
+#themesDifficulte3 {
+		
+	display: none;
+	width: 0px;
+}
+
 
 @font-face{  
 
