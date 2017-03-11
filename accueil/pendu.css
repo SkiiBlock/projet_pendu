@@ -1,6 +1,5 @@
-
 body {
-    background: url('fondEcran.png') repeat;
+    /*background: url('fondEcran.png') repeat;*/
     background-size: 100%;
 }
 
@@ -8,7 +7,7 @@ body {
 h1 {
 	
 	font-family: police;
-	font-size: 150px;
+	font-size: 120px;
 	color: red;
 	text-align: center;
 	margin-top: 20px;
@@ -84,6 +83,8 @@ h1 {
 		
 	display: none;
 	width: 0px;
+    border: solid; 
+     
 	
 }
 
@@ -91,12 +92,24 @@ h1 {
 		
 	display: none;
 	width: 0px;
+    border: solid;
 }
 
 #themesDifficulte3 {
 		
 	display: none;
 	width: 0px;
+    border: solid;
+    border-radius: 30px;
+    text-align: center; 
+}
+
+#niv1, #niv2, #niv3 {
+    
+    font-size: 20px; 
+    width: 60px; 
+    
+    
 }
 
 
