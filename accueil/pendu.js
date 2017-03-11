@@ -1,4 +1,4 @@
-			console.log("Chargement de Js : OK "); //Test du JavaScript
+console.log("Chargement de Js : OK "); //Test du JavaScript
 
 
 /*function supprimer(supp, objet_id){                        --- FONCTION FAIRE DISPARAITRE BOUTONS ---
@@ -24,7 +24,7 @@ function afficher(id){                                /* -- Fonction affichage t
 	for (var i = 1; i < 4; i++){
 		
 		
-		var elem2=document.getElementById("themesDifficulte"+ i);
+        var elem2=document.getElementById("themesDifficulte"+ i);
 		elem2.style.display = 'none';
 		elem2.style.width = "0px" ;
 		
@@ -36,5 +36,3 @@ function afficher(id){                                /* -- Fonction affichage t
 
 	
 }
-
-
