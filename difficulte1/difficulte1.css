@@ -1,7 +1,12 @@
+html {
+    font-family: Verdana, sans-serif;
+}
+
 tr, td {
     width: 15px;
     height: 20px;
     border: solid;
+    border-radius: 5px;
     padding: 5px;
     text-align: center;
 }
@@ -11,7 +16,12 @@ table {
 }
 
 div {
-    border: solid;
-    width: 500px;
+    display: flex;
+    justify-content: space-around;
+    width: 600px;
     margin: auto;
+}
+
+#divMot {
+    height: 72px;
 }
