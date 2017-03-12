@@ -1,4 +1,4 @@
-window.onload = function init() {
+window.onload = function init() {                       // Création alphabet
     
     var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
@@ -18,7 +18,7 @@ window.onload = function init() {
     }
 }
 
-function requestXML(url) { //fonction => request un mot dans le XML
+function requestXML(url) {                  // Création + envoie requête XML pour récupération des entrées
     
     var xhttp = new XMLHttpRequest();
     
@@ -32,21 +32,7 @@ function requestXML(url) { //fonction => request un mot dans le XML
     xhttp.send();
 }
 
-/*function reponseXML(xhttp, categorie) {
-    
-    var i = Math.floor(Math.random() * 6)
-    var xml = xhttp.responseXML.getElementsByTagName(categorie)[0].getElementsByTagName('mot')[i].childNodes[0].nodeValue;
-    
-    console.log(xml);
-    
-    var mot = xml.split('');
-    
-    console.log(mot);
-    tableau(mot);
-    
-}*/
-
-function responseText(xhttp) {
+function responseText(xhttp) {              //Récupération de toutes les entrées possibles + choix aléatoire
     
     var text = xhttp.responseText.split('\n');
     xhttp.responseText = null;
@@ -60,7 +46,7 @@ function responseText(xhttp) {
     
 }
 
-function tableau(mot) {
+function tableau(mot) {           //Création tableau + affichage dans tableau
     
     var tableau = document.getElementById('affichageMot');
     tableau.deleteRow(-1);
