@@ -1,19 +1,32 @@
+html {
+	
+	font-family: Verdana, sans-serif;
+	
+}
+
 body {
     /*background: url('fondEcran.png') repeat;*/
     background-size: 100%;
 }
 
-
 h1 {
 	
-	font-family: police;
-	font-size: 120px;
+	font-size: 100px;
 	color: red;
 	text-align: center;
 	margin-top: 20px;
-	margin-bottom: 0px;
+	margin-bottom: 10px;
 }
 
+h2 {
+	
+	font-size: 25px;
+	color: red;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	
+}
 
 
 .button {   /*boutons*/
@@ -79,29 +92,17 @@ h1 {
 		
 }
 
-#themesDifficulte1 {
+#themesDifficulte1, #themesDifficulte2, #themesDifficulte3  {  
+	
+	/*Cacher Thème au départ*/
 		
 	display: none;
 	width: 0px;
-    border: solid; 
+    border: none; 
+	align-items: center;
+	justify-content: center;
      
 	
-}
-
-#themesDifficulte2 {
-		
-	display: none;
-	width: 0px;
-    border: solid;
-}
-
-#themesDifficulte3 {
-		
-	display: none;
-	width: 0px;
-    border: solid;
-    border-radius: 30px;
-    text-align: center; 
 }
 
 #niv1, #niv2, #niv3 {
@@ -109,14 +110,19 @@ h1 {
     font-size: 20px; 
     width: 60px; 
     
-    
-}
+ }
 
-
-@font-face{  
-
-	font-family: 'police';       /* Nommer la police*/
-
-	src: url('police.ttf');  /*Indiquer fichier tff*/
-	
-}
+.buttonTheme {   /*boutons*/
+  
+ 
+  border-radius: 50px;
+  background-color: gray;
+  border: none;
+  color: white;
+  text-align: center;
+  font-size: 30px;
+  padding: 10px;
+  cursor: pointer; /*Changer la forme du curseur lors survole*/
+  margin: 10px;
+  width: 200px;
+  outline: none;
