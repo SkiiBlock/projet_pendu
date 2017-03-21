@@ -24,12 +24,10 @@ window.onload = function () {                       // Création alphabet
     var y = ua.indexOf('Firefox');
     
     if (x != -1) {
-        //console.log('requestXML');
         requestXML('difficulte1.xml');
     }
     
     if (y != -1) {
-        //console.log('requestText');
         requestText('apple.txt');
     }
 }
@@ -73,8 +71,6 @@ function reponseXML(xhttp, categorie) {
      
     var mot = xml.split('');
     response = mot;
-     
-    //console.log(mot);
     
     tableau(mot);
     
@@ -89,7 +85,6 @@ function responseText(xhttp) {              // Récupération de toutes les entr
     text[node] = text[node].trim();
     
     response = text[node].split('');
-    //console.log(response);
     tableau(response);
     
 }
@@ -109,11 +104,9 @@ function tableau(mot) {           // Création tableau + affichage dans tableau
 function core() {                   // Recherche lettre
     
     var x = event.target.innerHTML;
-    //console.log(x);
     
      for (var i=0; i<response.length; i++) {
         var y = response.indexOf(x, i);
-        //console.log(y);
         
         if (y == -1) {
             suppressionLettre(x);
@@ -128,7 +121,6 @@ function core() {                   // Recherche lettre
 function affichageTableau(y) {          // Affichage lettre dans 'affichageMot' + win
     
     var tableau = document.getElementById('affichageMot').getElementsByTagName('td');
-    //console.log(tableau.length);
     tableau[y].innerHTML = response[y];
     
     var z = [];
@@ -136,17 +128,12 @@ function affichageTableau(y) {          // Affichage lettre dans 'affichageMot' 
         z.push(tableau[i].innerHTML);     
     }
     
-    //console.log(z);
+    var a = response.toString();
+    var b = z.toString();
     
-    if (z == response) {
-        //console.log('Gagne');
+    if (a == b) {
+        alert('GAGNE');
     }
-        
-    /*for (var i=0; i<z.length; i++) {
-        if (z.indexOf('', i) == -1) {
-            console.log('GAGNE');
-        }
-    }*/
         
 }
 
