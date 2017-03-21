@@ -1,5 +1,4 @@
 var response;
-var count = 0;
 
 window.onload = function () {                       // Création alphabet
     
@@ -19,6 +18,9 @@ window.onload = function () {                       // Création alphabet
         var colonne = ligne.insertCell(x);
         colonne.innerHTML += alphabet[i];
     }
+    
+    //requestXML('difficulte1.xml');
+    //requestText('apple.txt');
     
     var ua = navigator.userAgent;
     var x = ua.indexOf('Chrome');
@@ -112,7 +114,7 @@ function core() {                   // Recherche lettre
     var x = event.target.innerHTML;
     console.log(x);
     
-     /*for (var i=0; i<response.length; i++) {
+     for (var i=0; i<response.length; i++) {
         var y = response.indexOf(x, i);
         console.log(y);
         
@@ -123,40 +125,28 @@ function core() {                   // Recherche lettre
             suppressionLettre(x);
         }
         
-    }*/
-    
-    var z = 0;
-    var i = 0;
-    
-    while (i < response.length) {
-        i++
-        var y = response.indexOf(x, z);
-        
-        if (y != -1) {
-            affichageTableau(x);
-            suppressionLettre(y);
-            z = y;
-        }
-        
-        if (y == -1) {
-            suppressionLettre(y);
-        }
-    }    
+    }
 }
 
 function affichageTableau(y) {          // Affichage lettre dans 'affichageMot' + win
     
     var tableau = document.getElementById('affichageMot').getElementsByTagName('td');
     console.log(tableau.length);
-    console.log(response);
     tableau[y].innerHTML = response[y];
-    count++;
-    console.log(count);
-    if (count == tableau.length) {
-        console.log('GAGNE');
+    
+    var z = [];
+    for (var i=0; i<tableau.length; i++) {
+        z.push(tableau[i].innerHTML);     
     }
     
-    
+    console.log(z);
+        
+    for (var i=0; i<z.length; i++) {
+        if (z.indexOf('', i) == -1) {
+            console.log('GAGNE');
+        }
+    }
+        
 }
 
 function suppressionLettre(x) {                 // Suppresion lettre dans 'table'
