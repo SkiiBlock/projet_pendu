@@ -20,19 +20,19 @@ window.onload = function () {                       // Création alphabet
         colonne.innerHTML += alphabet[i];
     }
     
-    requestText('apple.txt');
-    
-    /*var ua = navigator.userAgent;
+    var ua = navigator.userAgent;
     var x = ua.indexOf('Chrome');
     var y = ua.indexOf('Firefox');
     
     if (x != -1) {
+        console.log('requestXML');
         requestXML('difficulte1.xml');
     }
     
     if (y != -1) {
+        console.log('requestText');
         requestText('apple.txt');
-    }*/
+    }
 }
 
 function requestXML(url) {
@@ -78,7 +78,7 @@ function reponseXML(xhttp, categorie) {
     console.log(mot);
     
     tableau(mot);
-      
+    
 }
 
 function responseText(xhttp) {              // Récupération de toutes les entrées possibles + choix aléatoire
