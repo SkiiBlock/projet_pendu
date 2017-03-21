@@ -121,23 +121,6 @@ function grabId(e) {
 
 }
 
-function core() {                   // Recherche lettre
-    
-    var x = event.target.innerHTML;
-    
-     for (var i=0; i<response.length; i++) {
-        var y = response.indexOf(x, i);
-        
-        if (y == -1) {
-            suppressionLettre(x);
-        }else{
-            affichageTableau(y);
-            suppressionLettre(x);
-        }
-        
-    }
-}
-
 function affichageTableau(y) {          // Affichage lettre dans 'affichageMot' + win
     
     var tableau = document.getElementById('affichageMot').getElementsByTagName('td');
