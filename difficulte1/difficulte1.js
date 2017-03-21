@@ -19,9 +19,6 @@ window.onload = function () {                       // Création alphabet
         colonne.innerHTML += alphabet[i];
     }
     
-    //requestXML('difficulte1.xml');
-    //requestText('apple.txt');
-    
     var ua = navigator.userAgent;
     var x = ua.indexOf('Chrome');
     var y = ua.indexOf('Firefox');
@@ -76,8 +73,6 @@ function reponseXML(xhttp, categorie) {
      
     var mot = xml.split('');
     response = mot;
-     
-    console.log(mot);
     
     tableau(mot);
     
@@ -92,7 +87,6 @@ function responseText(xhttp) {              // Récupération de toutes les entr
     text[node] = text[node].trim();
     
     response = text[node].split('');
-    console.log(response);
     tableau(response);
     
 }
@@ -112,11 +106,9 @@ function tableau(mot) {           // Création tableau + affichage dans tableau
 function core() {                   // Recherche lettre
     
     var x = event.target.innerHTML;
-    console.log(x);
     
      for (var i=0; i<response.length; i++) {
         var y = response.indexOf(x, i);
-        console.log(y);
         
         if (y == -1) {
             suppressionLettre(x);
@@ -131,15 +123,12 @@ function core() {                   // Recherche lettre
 function affichageTableau(y) {          // Affichage lettre dans 'affichageMot' + win
     
     var tableau = document.getElementById('affichageMot').getElementsByTagName('td');
-    console.log(tableau.length);
     tableau[y].innerHTML = response[y];
     
     var z = [];
     for (var i=0; i<tableau.length; i++) {
         z.push(tableau[i].innerHTML);     
     }
-    
-    console.log(z);
         
     for (var i=0; i<z.length; i++) {
         if (z.indexOf('', i) == -1) {
