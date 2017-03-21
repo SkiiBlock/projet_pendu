@@ -101,6 +101,26 @@ function tableau(mot) {           // Création tableau + affichage dans tableau
     }
 }
 
+function grabId(e) {
+	var e = window.event || e;
+	var targ = e.target || e.srcElement;
+    
+    var x = targ.innerHTML;
+    
+    for (var i=0; i<response.length; i++) {
+        var y = response.indexOf(x, i);
+        
+        if (y == -1) {
+            suppressionLettre(x);
+        }else{
+            affichageTableau(y);
+            suppressionLettre(x);
+        }
+        
+    }
+
+}
+
 function core() {                   // Recherche lettre
     
     var x = event.target.innerHTML;
@@ -132,7 +152,7 @@ function affichageTableau(y) {          // Affichage lettre dans 'affichageMot' 
     var b = z.toString();
     
     if (a == b) {
-        alert('GAGNE');
+        console.log('GAGNE');
     }
         
 }
@@ -143,7 +163,7 @@ function suppressionLettre(x) {                 // Suppresion lettre dans 'table
     
     for (var i=0; i<tableau.length; i++) {
         if (tableau[i].innerHTML == x) {
-            tableau[i].innerHTML = ' ';
+            tableau[i].innerHTML = '';
         }
     }
 }
