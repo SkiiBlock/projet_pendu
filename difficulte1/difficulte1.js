@@ -28,7 +28,7 @@ window.onload = function () {                       // Création alphabet
     }
     
     if (y != -1) {
-        requestText('apple.txt');
+        requestText('ecole.txt');
     }
 }
 
