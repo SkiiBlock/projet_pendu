@@ -1,6 +1,8 @@
 var response;
 
-window.onload = function () {                       // Création alphabet
+window.onload = load();
+    
+function load() {                       // Création alphabet
     
     var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
@@ -135,7 +137,7 @@ function affichageTableau(y) {          // Affichage lettre dans 'affichageMot' 
     var b = z.toString();
     
     if (a == b) {
-        console.log('GAGNE');
+        win();
     }
         
 }
@@ -149,4 +151,16 @@ function suppressionLettre(x) {                 // Suppresion lettre dans 'table
             tableau[i].innerHTML = '';
         }
     }
+}
+
+function win() {
+    console.log('Tu as trouvé le mot !');
+    setTimeout(function reset() {
+        var tableau = document.getElementById('table');
+    
+        tableau.deleteRow(-1);
+        tableau.deleteRow(-1);
+        load();
+        
+    }, 2000);
 }
