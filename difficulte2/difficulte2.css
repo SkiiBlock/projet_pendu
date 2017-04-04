@@ -1,0 +1,39 @@
+html {
+    font-family: Verdana, sans-serif;
+}
+
+#info {
+    display: none;
+}
+
+tr, td {
+    width: 15px;
+    height: 20px;
+    border: solid;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+}
+
+table {
+    border-spacing: 15px;
+    cursor: default;
+}
+
+div {
+    display: flex;
+    justify-content: center;
+}
+
+#ecranJeu {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 700px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+#divMot {
+    height: 72px;
+}
