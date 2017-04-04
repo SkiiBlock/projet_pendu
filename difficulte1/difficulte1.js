@@ -1,6 +1,7 @@
 var response;
 var coups = 0;
 var pinTable = [];
+var motTire = [];
 
 window.onload = load();
     
@@ -75,9 +76,17 @@ function reponseXML(xhttp, categorie) {
     var mot = xml.split('');
     response = mot;
     
-    tableau(mot);
-    console.log(response);
+    var x = 0;
+    while (x<motTire.length) {
+        if (motTire[x] == xml) {
+            requestXML('difficulte1.xml');
+        }
+        x++;
+    }
     
+    tableau(mot);
+    motTire.push(xml);
+    console.log(motTire);
 }
 
 function responseText(xhttp) {              // Récupération de toutes les entrées possibles + choix aléatoire
@@ -89,9 +98,9 @@ function responseText(xhttp) {              // Récupération de toutes les entr
     text[node] = text[node].trim();
     
     response = text[node].split('');
-    tableau(response);
-    console.log(response);
     
+    tableau(response);
+    console.log(node);
 }
 
 function tableau(mot) {           // Création tableau + affichage dans tableau
@@ -105,31 +114,6 @@ function tableau(mot) {           // Création tableau + affichage dans tableau
         colonne.innerHTML = '';
     }
 }
-
-/*function grabId(e) {
-	var e = window.event || e;
-	var targ = e.target || e.srcElement;
-    
-    var x = targ.innerHTML;
-    
-    for (var i=0; i<response.length; i++) {
-        var y = response.indexOf(x, i);
-        
-        if (y == -1) {
-            suppressionLettre(x);
-            //coups++;
-            //console.log(coups);
-            //if (coups == 9) {loose();}
-        }else{
-            affichageTableau(y);
-            suppressionLettre(x);
-        }
-        
-    }
-
-}*/
-
-
 
 function grabId(e) {
     var e = window.event || e;
