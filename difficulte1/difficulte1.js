@@ -1,33 +1,37 @@
-var response;
+var response;       // création des variables globales nécessaire pour plusieurs fonctions
 var coups = 0;
 var pinTable = [];
 var motTire = [];
 
 window.onload = load();
     
-function load() {                       // Création alphabet
+function load() {       // fonction utilisé pour initialiser le code et l'affichage
+    
+    /**** CREATION D'UN ALPHABET ****/
     
     var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    console.log(alphabet);
     var tableau = document.getElementById('table');
     
-    var ligne = tableau.insertRow(-1);
-    for (var i=0; i<13; i++) {
-        var colonne = ligne.insertCell(i);
+    var ligne = tableau.insertRow(-1);      // insertRow() permet d'insérer une ligne
+    for (var i=0; i<13; i++) {              // on ne met que les 13 premières lettres
+        var colonne = ligne.insertCell();   // insertCell() permet d'insérer une colonne
         colonne.innerHTML += alphabet[i];
     }
     
-    var ligne = tableau.insertRow(-1);
-    for (var i=13; i<26; i++) {
-        var x=-1;
-        var colonne = ligne.insertCell(x);
+    var ligne = tableau.insertRow(-1);      // on recommence pour une nouvelle ligne
+    for (var i=13; i<26; i++) {             // on part maintenant de la 14e lettre
+        var colonne = ligne.insertCell();
         colonne.innerHTML += alphabet[i];
     }
     
-    var ua = navigator.userAgent;
-    var x = ua.indexOf('Chrome');
+    /**** TEST DU NAVIGATEUR ****/
+    
+    var ua = navigator.userAgent;           // userAgent nous renvoie des informations sur le navigateur utilisé, stocké dans la variable 'ua'
+    var x = ua.indexOf('Chrome');           // on cherche quel est le navigateur utilisé
     var y = ua.indexOf('Firefox');
     
-    if (x != -1) {
+    if (x != -1) {                          // indexOf() renvoie -1 lorsqu'il ne trouve pas le mot recherché (ici 'Chrome' ou 'Firefox')
         requestXML('difficulte1.xml');
     }
     
@@ -36,14 +40,30 @@ function load() {                       // Création alphabet
     }
 }
 
-function requestXML(url) {
+function requestXML(url) {      /**** XMLHttpRequest (méthode #1) ****/
+    
+    var xhttp = new XMLHttpRequest();                           // création de la requête
+    var categorie = document.getElementById('info').innerHTML;  // on récupère la catégorie de la page chargé
+    
+    xhttp.onreadystatechange = function() {     // .onreadystatechange vérifie si les variables vont changer
+        if (this.readyState == 4 && this.status == 200) {
+            reponseXML(xhttp, categorie);       // on lance la fonction réponse quand les variables ont changé et que la requête a réussi
+        }
+    }
+    
+    xhttp.open('GET', url, true);       // on ouvre la requête
+    xhttp.send();                       // on envoie la requête
+    
+}
+
+function requestText(url) {     /**** XMLHttpRequest (méthode #2) ****/
     
     var xhttp = new XMLHttpRequest();
     var categorie = document.getElementById('info').innerHTML;
     
-    xhttp.onreadystatechange = function() {
+    xhttp.onreadystatechange = function() {     
         if (this.readyState == 4 && this.status == 200) {
-            reponseXML(xhttp, categorie);
+            responseText(this);         // on change ici la fonction réponse car on récupère du texte
         }
     }
     
@@ -52,64 +72,52 @@ function requestXML(url) {
     
 }
 
-function requestText(url) {
-    
-    var xhttp = new XMLHttpRequest();
-    var categorie = document.getElementById('info').innerHTML;
-    
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            responseText(this);
-        }
-    }
-    
-    xhttp.open('GET', url, true);
-    xhttp.send();
-    
-}
-
-function reponseXML(xhttp, categorie) {
+function reponseXML(xhttp, categorie) {     /**** RECUPERATION REPONSE ****/
       
-    var i = Math.floor(Math.random() * 6)
-    var xml = xhttp.responseXML.getElementsByTagName(categorie)[0].getElementsByTagName('mot')[i].childNodes[0].nodeValue;
+    var i = Math.floor(Math.random() * 6)       // on tire un nombre aléatoire entre 0 et le nombre de mot maximum
+    var xml = xhttp.responseXML.getElementsByTagName(categorie)[0].getElementsByTagName('mot')[i].childNodes[0].nodeValue;                  // on récupère un mot de la liste en fonction du nombre tiré
      
-    var mot = xml.split('');
-    response = mot;
+    var mot = xml.split('');        // .split('') permet de couper le mot entre chaque lettre
+    response = mot;     // on enregistre le mot tiré dans la variable globale 'response'
     
     var x = 0;
-    while (x<motTire.length) {
-        if (motTire[x] == xml) {
+    while (x<motTire.length) {      // on lance la fonction pour tester chaque entrée de la variable en fonction de sa longueur
+        if (motTire[x] == xml) {    // on regarde si le mot tiré a déjà été tiré
             requestXML('difficulte1.xml');
         }
         x++;
     }
     
-    tableau(mot);
-    motTire.push(xml);
+    var y = motTire.indexOf(xml);
+    if (y == -1) {      // on enregistre le mot tiré uniquement s'il n'a pas déjà été tiré
+        motTire.push(xml);
+    }
+    
+    tableau(mot);       // on lance la fonction avec le mot tiré
     console.log(motTire);
 }
 
-function responseText(xhttp) {              // Récupération de toutes les entrées possibles + choix aléatoire
+function responseText(xhttp) {              /**** RECUPERATION REPONSE ****/
     
     var text = xhttp.responseText.split('\n');
     xhttp.responseText = null;
     
-    var node = Math.floor(Math.random()*text.length);
-    text[node] = text[node].trim();
+    var i = Math.floor(Math.random()*text.length);
+    text[i] = text[i].trim();
     
-    response = text[node].split('');
+    response = text[i].split('');
     
     tableau(response);
-    console.log(node);
+    console.log(i);
 }
 
-function tableau(mot) {           // Création tableau + affichage dans tableau
+function tableau(mot) {     /**** CREATION TABLEAU ****/
     
     var tableau = document.getElementById('affichageMot');
-    tableau.deleteRow(-1);
+    tableau.deleteRow(-1);      // deleteRow() permet de supprimer une ligne
     var ligne = tableau.insertRow(-1);
     
-    for (var i=0; i<mot.length; i++) {
+    for (var i=0; i<mot.length; i++) {          // on insère une colonne vide pour chaque lettre du mot
         var colonne = ligne.insertCell(i);
         colonne.innerHTML = '';
     }
