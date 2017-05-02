@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <dictionnaire>
+    
     <ecole>
         <mot>ECOLE</mot>
         <mot>CLASSE</mot>
@@ -20,4 +21,18 @@
         <mot>PAPIER</mot>
         <mot>PROFESSEUR</mot>
     </ecole>
+    
+    <couleurs>
+        <mot>ROUGE</mot>
+        <mot>VERT</mot>
+        <mot>BLEU</mot>
+        <mot>ROSE</mot>
+        <mot>ORANGE</mot>
+        <mot>NOIR</mot>
+        <mot>MAGENTA</mot>
+        <mot>GRIS</mot>
+        <mot>MARRON</mot>
+        <mot>BLANC</mot>    
+    </couleurs>
+    
 </dictionnaire>
