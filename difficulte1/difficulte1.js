@@ -2,6 +2,8 @@ var response;       // création des variables globales nécessaire pour plusieu
 var coups = 0;
 var pinTable = [];
 var motTire = [];
+var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var bResponse = 0;
 
 window.onload = load();
     
@@ -9,7 +11,7 @@ function load() {       // fonction utilisé pour initialiser le code et l'affic
     
     /**** CREATION D'UN ALPHABET ****/
     
-    var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    
     console.log(alphabet);
     var tableau = document.getElementById('table');
     
@@ -74,11 +76,15 @@ function requestText(url) {     /**** XMLHttpRequest (méthode #2) ****/
 
 function reponseXML(xhttp, categorie) {     /**** RECUPERATION REPONSE ****/
       
-    var i = Math.floor(Math.random() * 6)       // on tire un nombre aléatoire entre 0 et le nombre de mot maximum
+    var i = Math.floor(Math.random() * 18)       // on tire un nombre aléatoire entre 0 et le nombre de mot maximum
     var xml = xhttp.responseXML.getElementsByTagName(categorie)[0].getElementsByTagName('mot')[i].childNodes[0].nodeValue;                  // on récupère un mot de la liste en fonction du nombre tiré
      
-    var mot = xml.split('');        // .split('') permet de couper le mot entre chaque lettre
-    response = mot;     // on enregistre le mot tiré dans la variable globale 'response'
+    response = xml.split('');        // .split('') permet de couper le mot entre chaque lettre
+                                    // on enregistre le mot tiré dans la variable globale 'response'
+    
+    if (motTire.length == 18) {
+        finDuJeu();
+    }
     
     var x = 0;
     while (x<motTire.length) {      // on lance la fonction pour tester chaque entrée de la variable en fonction de sa longueur
@@ -93,7 +99,7 @@ function reponseXML(xhttp, categorie) {     /**** RECUPERATION REPONSE ****/
         motTire.push(xml);
     }
     
-    tableau(mot);       // on lance la fonction avec le mot tiré
+    tableau(response);       // on lance la fonction avec le mot tiré
     console.log(motTire);
 }
 
@@ -107,8 +113,25 @@ function responseText(xhttp) {              /**** RECUPERATION REPONSE ****/
     
     response = text[i].split('');
     
+    if (motTire.length == 18) {
+        finDuJeu();
+    }
+    
+    var x = 0;
+    while (x<motTire.length) {
+        if (motTire[x] == text[i]) {
+            requestText('ecole.txt');
+        }
+        x++;
+    }
+    
+    var y = motTire.indexOf(text[i]);
+    if (y == -1) {
+        motTire.push(text[i]);
+    }
+    
     tableau(response);
-    console.log(i);
+    console.log(motTire);
 }
 
 function tableau(mot) {     /**** CREATION TABLEAU ****/
@@ -124,7 +147,7 @@ function tableau(mot) {     /**** CREATION TABLEAU ****/
 }
 
 function grabId(e) {
-    var e = window.event || e;
+    var e = window.event || e;              // on utilise deux méthodes pour récupérer l'élément cliqué
 	var targ = e.target || e.srcElement;
     
     var x = targ.innerHTML;
@@ -134,29 +157,31 @@ function grabId(e) {
     var a = response.indexOf(x, 0);
     var b = 0;
     
-    if (a == -1) {
-        suppressionLettre(x);
-        coups++;
-        if (coups == 9) {loose();}
-    }
+    for (var i=0; i<26; i++) {
+        if (x == alphabet[i]) {
+            if (a == -1) {
+                suppressionLettre(x);
+                coups++;
+                if (coups == 9) {loose();}
+            }
     
-    while (b<response.length) {
+            while (b<response.length) {
         
-        var a = response.indexOf(x, b);
+                var a = response.indexOf(x, b);
         
-        if (a != -1) {
-            pinTable.push(a);
-            b = a + 1;
+                if (a != -1) {
+                    pinTable.push(a);
+                    b = a + 1;
+                }
+        
+                if (a == -1) {
+                    b = response.length;
+                }
+            }
+            suppressionLettre(x);
+            affichageTableau();
         }
-        
-        if (a == -1) {
-            b = response.length;
-        }
-        
     }
-    
-    suppressionLettre(x);
-    affichageTableau();
 }
 
 function affichageTableau(y) {          // Affichage lettre dans 'affichageMot' + win
@@ -206,6 +231,7 @@ function win() {
         coups = 0;
         pinTable = [];
         response = [];
+        bResponse++;
     
         tableau.deleteRow(-1);
         tableau.deleteRow(-1);
@@ -228,4 +254,9 @@ function loose() {
         load();
         
     }, 2000);
+}
+
+function finDuJeu() {
+    alert('GG');
+    console.log("Tu as "+ bResponse +" bonnes réponses sur 5")
 }
