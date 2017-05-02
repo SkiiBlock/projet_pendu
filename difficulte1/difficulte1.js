@@ -38,7 +38,8 @@ function load() {       // fonction utilisé pour initialiser le code et l'affic
     }
     
     if (y != -1) {
-        requestText('ecole.txt');
+        var categorie = document.getElementById('info').innerHTML;
+        requestText(categorie+'.txt');
     }
 }
 
@@ -162,7 +163,10 @@ function grabId(e) {
             if (a == -1) {
                 suppressionLettre(x);
                 coups++;
-                if (coups == 9) {loose();}
+                
+                img = document.getElementById('img');
+                
+                if (coups == 9) {loose();}                
             }
     
             while (b<response.length) {
