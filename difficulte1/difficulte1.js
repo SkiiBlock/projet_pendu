@@ -11,7 +11,6 @@ function load() {       // fonction utilisé pour initialiser le code et l'affic
     
     /**** CREATION D'UN ALPHABET ****/
     
-    
     console.log(alphabet);
     var tableau = document.getElementById('table');
     
@@ -41,6 +40,20 @@ function load() {       // fonction utilisé pour initialiser le code et l'affic
         var categorie = document.getElementById('info').innerHTML;
         requestText(categorie+'.txt');
     }
+    
+    var image = new Image();
+    image.addEventListener('load', function() {
+        var reduction = 1;
+        var img = document.getElementById('img');
+        var div = document.getElementById('div0');
+
+        reduction = Math.max(image.width / (div0.clientWidth), image.height / (div0.clientHeight));
+        img.src = image.src;
+        img.width = Math.round(image.width / reduction);
+        img.height = Math.round(image.height / reduction);
+    });
+                
+    image.src = '../Image/reset.png';
 }
 
 function requestXML(url) {      /**** XMLHttpRequest (méthode #1) ****/
@@ -164,7 +177,21 @@ function grabId(e) {
                 suppressionLettre(x);
                 coups++;
                 
-                img = document.getElementById('img');
+                
+                
+                var image = new Image();
+                image.addEventListener('load', function() {
+                    var reduction = 1;
+                    var img = document.getElementById('img');
+                    var div = document.getElementById('div0');
+
+                    reduction = Math.max(image.width / (div0.clientWidth), image.height / (div0.clientHeight));
+                    img.src = image.src;
+                    img.width = Math.round(image.width / reduction);
+                    img.height = Math.round(image.height / reduction);
+                });
+                
+                image.src = '../Image/' + coups + '.png';
                 
                 if (coups == 9) {loose();}                
             }
@@ -262,5 +289,5 @@ function loose() {
 
 function finDuJeu() {
     alert('GG');
-    console.log("Tu as "+ bResponse +" bonnes réponses sur 5")
+    console.log("Tu as "+ bResponse +" bonnes réponses sur 18")
 }
