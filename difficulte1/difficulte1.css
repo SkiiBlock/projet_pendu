@@ -25,13 +25,19 @@ div {
     justify-content: center;
 }
 
+#div0 {
+    width: 75%;
+    height: auto;
+    margin: auto;
+    align-content: center;
+}
+
 #ecranJeu {
     display: flex;
     justify-content: center;
     flex-direction: column;
     width: 700px;
-    margin: auto;
-    margin-top: 50px;
+    height: auto;
 }
 
 #divMot {
