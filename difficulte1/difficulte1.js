@@ -11,7 +11,6 @@ function load() {       // fonction utilisé pour initialiser le code et l'affic
     
     /**** CREATION D'UN ALPHABET ****/
     
-    console.log(alphabet);
     var tableau = document.getElementById('table');
     
     var ligne = tableau.insertRow(-1);      // insertRow() permet d'insérer une ligne
@@ -43,11 +42,10 @@ function load() {       // fonction utilisé pour initialiser le code et l'affic
     
     var image = new Image();
     image.addEventListener('load', function() {
-        var reduction = 1;
+        var reduction = 9;
         var img = document.getElementById('img');
         var div = document.getElementById('div0');
 
-        reduction = Math.max(image.width / (div0.clientWidth), image.height / (div0.clientHeight));
         img.src = image.src;
         img.width = Math.round(image.width / reduction);
         img.height = Math.round(image.height / reduction);
@@ -96,7 +94,7 @@ function reponseXML(xhttp, categorie) {     /**** RECUPERATION REPONSE ****/
     response = xml.split('');        // .split('') permet de couper le mot entre chaque lettre
                                     // on enregistre le mot tiré dans la variable globale 'response'
     
-    if (motTire.length == 18) {
+    if (motTire.length == 1) {
         finDuJeu();
     }
     
@@ -114,7 +112,6 @@ function reponseXML(xhttp, categorie) {     /**** RECUPERATION REPONSE ****/
     }
     
     tableau(response);       // on lance la fonction avec le mot tiré
-    console.log(motTire);
 }
 
 function responseText(xhttp) {              /**** RECUPERATION REPONSE ****/
@@ -127,7 +124,7 @@ function responseText(xhttp) {              /**** RECUPERATION REPONSE ****/
     
     response = text[i].split('');
     
-    if (motTire.length == 18) {
+    if (motTire.length == 20) {
         finDuJeu();
     }
     
@@ -145,7 +142,6 @@ function responseText(xhttp) {              /**** RECUPERATION REPONSE ****/
     }
     
     tableau(response);
-    console.log(motTire);
 }
 
 function tableau(mot) {     /**** CREATION TABLEAU ****/
@@ -181,11 +177,10 @@ function grabId(e) {
                 
                 var image = new Image();
                 image.addEventListener('load', function() {
-                    var reduction = 1;
+                    var reduction = 9;
                     var img = document.getElementById('img');
                     var div = document.getElementById('div0');
-
-                    reduction = Math.max(image.width / (div0.clientWidth), image.height / (div0.clientHeight));
+                    
                     img.src = image.src;
                     img.width = Math.round(image.width / reduction);
                     img.height = Math.round(image.height / reduction);
@@ -255,9 +250,13 @@ function suppressionLettre(x) {                 // Suppresion lettre dans 'table
 }
 
 function win() {
-    console.log('Tu as trouvé le mot !');
+    var textJS = document.getElementById('textJS');
+    textJS.innerHTML = "Tu as trouvé le mot !";
+    textJS.style.color = 'green';
+    
     setTimeout(function reset() {
         var tableau = document.getElementById('table');
+        textJS.innerHTML = '';
         
         coups = 0;
         pinTable = [];
@@ -272,9 +271,13 @@ function win() {
 }
 
 function loose() {
-    console.log("Tu n'as pas trouvé le mot !");
+    var textJS = document.getElementById('textJS');
+    textJS.innerHTML = "Tu n'as pas trouvé le mot !";
+    textJS.style.color = 'red';
+    
     setTimeout(function reset() {
         var tableau = document.getElementById('table');
+        textJS.innerHTML = '';
         
         coups = 0;
         pinTable = [];
@@ -288,6 +291,10 @@ function loose() {
 }
 
 function finDuJeu() {
-    alert('GG');
-    console.log("Tu as "+ bResponse +" bonnes réponses sur 18")
+    var x = document.getElementById('info').innerHTML;
+    
+    var textJS = document.getElementById('textJS');
+    textJS.innerHTML = "Tu as terminé le thème " + x + '<br>';
+    textJS.innerHTML += "Tu as "+ bResponse +" bonnes réponses sur 20";
+    textJS.style.color = 'green';
 }
