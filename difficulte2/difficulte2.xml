@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+
 <dictionnaire>
     <ecole>
-        
+		<mot>INSTITUTEUR</mot>
+		<mot>REGLES</mot>
+		<mot>RECREATION</mot>
+		<mot>EQUERRE</mot>
+		<mot>COMPA</mot>
+		<mot>CANTINE</mot>
+		<mot>MATHEMATIQUE</mot>
+		<mot>GEOMETRIE</mot>
     </ecole>
 </dictionnaire>
