@@ -94,7 +94,7 @@ function reponseXML(xhttp, categorie) {     /**** RECUPERATION REPONSE ****/
     response = xml.split('');        // .split('') permet de couper le mot entre chaque lettre
                                     // on enregistre le mot tiré dans la variable globale 'response'
     
-    if (motTire.length == 1) {
+    if (motTire.length == 5) {
         finDuJeu();
     }
     
@@ -124,7 +124,7 @@ function responseText(xhttp) {              /**** RECUPERATION REPONSE ****/
     
     response = text[i].split('');
     
-    if (motTire.length == 20) {
+    if (motTire.length == 5) {
         finDuJeu();
     }
     
@@ -295,6 +295,6 @@ function finDuJeu() {
     
     var textJS = document.getElementById('textJS');
     textJS.innerHTML = "Tu as terminé le thème " + x + '<br>';
-    textJS.innerHTML += "Tu as "+ bResponse +" bonnes réponses sur 20";
+    textJS.innerHTML += "Tu as "+ bResponse +" bonnes réponses sur 5";
     textJS.style.color = 'green';
 }
