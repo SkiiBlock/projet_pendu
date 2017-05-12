@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <dictionnaire>
     
-    <ecole>
+    <Ecole>
         <mot>ECOLE</mot>
         <mot>CLASSE</mot>
         <mot>DEVOIR</mot>
@@ -20,9 +20,9 @@
         <mot>ECRIRE</mot>
         <mot>PAPIER</mot>
         <mot>PROFESSEUR</mot>
-    </ecole>
+    </Ecole>
     
-    <couleurs>
+    <Couleurs>
         <mot>ROUGE</mot>
         <mot>VERT</mot>
         <mot>BLEU</mot>
@@ -33,7 +33,7 @@
         <mot>GRIS</mot>
         <mot>MARRON</mot>
         <mot>BLANC</mot>    
-    </couleurs>
+    </Couleurs>
     
 </dictionnaire>
 
