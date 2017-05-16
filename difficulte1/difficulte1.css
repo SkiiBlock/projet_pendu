@@ -1,5 +1,18 @@
 html {
     font-family: Verdana, sans-serif;
+	background-color: #DDDEDE;
+	
+
+}
+
+h1 {
+	
+	text-align: center;
+	color: #369393;
+	font-family: police;
+	font-size: 130px;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
 #info {
@@ -23,14 +36,20 @@ table {
 div {
     display: flex;
     justify-content: center;
+	border-radius: 50px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #div0 {
+	display: flex;
+	justify-content: center;
     width: 75%;
     height: auto;
     margin: auto;
     align-content: center;
 	background-color: #369393;
+	margin-top: 0px; 
 }
 
 #ecranJeu {
@@ -39,8 +58,7 @@ div {
     flex-direction: column;
 	border-radius: 10%;
     width: 800px;
-    height: auto;
-	
+    height: auto;	
 	color:#87D1D1; 
 	
 }
@@ -52,3 +70,16 @@ div {
 #textJS {
     text-align: center;
 }
+
+@font-face{  
+
+	font-family: 'police';       /* Nommer la police*/
+
+	src: url('police.ttf');  /*Indiquer fichier ttf*/
+
+	font-weight: normal; 	     /*Taille de base sans configuration*/
+
+	font-style: normal; 
+
+}
+
