@@ -1,8 +1,7 @@
 html {
     font-family: Verdana, sans-serif;
 	background-color: #DDDEDE;
-	
-
+	user-select : none;
 }
 
 h1 {
