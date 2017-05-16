@@ -98,6 +98,9 @@ function reponseXML(xhttp, categorie) {     /**** RECUPERATION REPONSE ****/
         finDuJeu();
     }
     
+    console.log(xml);
+    console.log(motTire);
+    
     var x = 0;
     while (x<motTire.length) {      // on lance la fonction pour tester chaque entrée de la variable en fonction de sa longueur
         if (motTire[x] == xml) {    // on regarde si le mot tiré a déjà été tiré
@@ -161,8 +164,17 @@ function grabId(e) {
 	var targ = e.target || e.srcElement;
     
     var x = targ.innerHTML;
-    var y = 0;
+    rechercheLettre(x);    
+}
+
+window.onkeydown = function(e) {
+    var x = e.which;
+    var y = alphabet[(x-65)];
     
+    rechercheLettre(y);
+}
+
+function rechercheLettre(x) {
     pinTable = [];
     var a = response.indexOf(x, 0);
     var b = 0;
@@ -172,8 +184,6 @@ function grabId(e) {
             if (a == -1) {
                 suppressionLettre(x);
                 coups++;
-                
-                
                 
                 var image = new Image();
                 image.addEventListener('load', function() {
@@ -210,7 +220,7 @@ function grabId(e) {
     }
 }
 
-function affichageTableau(y) {          // Affichage lettre dans 'affichageMot' + win
+function affichageTableau() {          // Affichage lettre dans 'affichageMot' + win
 
     var c = 0;
     
@@ -265,7 +275,9 @@ function win() {
     
         tableau.deleteRow(-1);
         tableau.deleteRow(-1);
-        load();
+        if (motTire.length < 5) {
+            load();
+        }
         
     }, 2000);
 }
@@ -297,4 +309,22 @@ function finDuJeu() {
     textJS.innerHTML = "Tu as terminé le thème " + x + '<br>';
     textJS.innerHTML += "Tu as "+ bResponse +" bonnes réponses sur 5";
     textJS.style.color = 'green';
+    
+    setTimeout(affichageFinPendu(), 2000);
+    
+}
+
+function affichageFinPendu() {
+    var tableau = document.getElementById('affichageMot').getElementsByTagName('td');
+    
+    var z = motTire[0].split('');
+    console.log(z);
+    
+    for (var i=0; i<z.length; i++) {
+        z.push(tableau[i].innerHTML);     
+    }
+    
+    motTire.shift();
+    setTimeout(affichageFinPendu(), 2000);
+    
 }
