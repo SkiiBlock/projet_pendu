@@ -4,6 +4,8 @@ var pinTable = [];
 var motTire = [];
 var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var bResponse = 0;
+var interval = null;
+var corrige = [];
 
 window.onload = load();
     
@@ -270,11 +272,10 @@ function win() {
     
         tableau.deleteRow(-1);
         tableau.deleteRow(-1);
-        if (motTire.length < 5) {
-            load();
-        }
-        
+        load();        
     }, 2000);
+    
+    corrige.push('1');
 }
 
 function loose() {
@@ -293,8 +294,9 @@ function loose() {
         tableau.deleteRow(-1);
         tableau.deleteRow(-1);
         load();
-        
     }, 2000);
+    
+    corrige.push('0');
 }
 
 function finDuJeu() {
@@ -302,24 +304,46 @@ function finDuJeu() {
     
     var textJS = document.getElementById('textJS');
     textJS.innerHTML = "Tu as terminé le thème " + x + '<br>';
-    textJS.innerHTML += "Tu as "+ bResponse +" bonnes réponses sur 5";
+    textJS.innerHTML += "Tu as "+ bResponse +" bonnes réponses sur 20";
     textJS.style.color = 'green';
     
-    setTimeout(affichageFinPendu(), 2000);
+    //console.log(motTire);
+    interval = setInterval(affichageFinPendu, 2000);
     
 }
 
 function affichageFinPendu() {
-    var tableau = document.getElementById('affichageMot').getElementsByTagName('td');
+    var tableau = document.getElementById('affichageMot')//.getElementsByTagName('td');
+    tableau.deleteRow(-1);
     
     var z = motTire[0].split('');
     console.log(z);
-    
+    var ligne = tableau.insertRow(-1);
     for (var i=0; i<z.length; i++) {
-        z.push(tableau[i].innerHTML);     
+        var colonne = ligne.insertCell(i);
+        colonne.innerHTML = '';
+    }
+    var table = tableau.getElementsByTagName('td');
+    for (var i=0; i<table.length; i++) {
+        table[i].innerHTML = z[i];
+    }
+    motTire.shift();
+    
+    var y = corrige[0];
+    var x = document.getElementById('ecranJeu');
+    
+    if (y == 0) {
+        x.style.color = 'red';
     }
     
-    motTire.shift();
-    setTimeout(affichageFinPendu(), 2000);
+    if (y == 1) {
+        x.style.color = 'green';
+    }
     
+    corrige.shift();
+    
+    console.log(motTire.length);
+    if (motTire.length == 0) {
+        clearInterval(interval);
+    }
 }
