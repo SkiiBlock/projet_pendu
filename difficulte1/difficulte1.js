@@ -88,32 +88,27 @@ function requestText(url) {     /**** XMLHttpRequest (méthode #2) ****/
 
 function reponseXML(xhttp, categorie) {     /**** RECUPERATION REPONSE ****/
       
-    var i = Math.floor(Math.random() * 18)       // on tire un nombre aléatoire entre 0 et le nombre de mot maximum
+    var i = Math.floor(Math.random() * 20)       // on tire un nombre aléatoire entre 0 et le nombre de mot maximum
     var xml = xhttp.responseXML.getElementsByTagName(categorie)[0].getElementsByTagName('mot')[i].childNodes[0].nodeValue;                  // on récupère un mot de la liste en fonction du nombre tiré
-     
-    response = xml.split('');        // .split('') permet de couper le mot entre chaque lettre
-                                    // on enregistre le mot tiré dans la variable globale 'response'
     
-    if (motTire.length == 5) {
+    for (var i=0; i<motTire.length; i++) {
+        if (motTire[i] === xml) {
+            requestXML('difficulte1.xml');
+        }
+    }
+    
+    if (motTire.length == 2) {
         finDuJeu();
     }
     
-    console.log(xml);
-    console.log(motTire);
-    
-    var x = 0;
-    while (x<motTire.length) {      // on lance la fonction pour tester chaque entrée de la variable en fonction de sa longueur
-        if (motTire[x] == xml) {    // on regarde si le mot tiré a déjà été tiré
-            requestXML('difficulte1.xml');
+    if (motTire.length != 2) {
+        var y = motTire.indexOf(xml);
+        if (y == -1) {      // on enregistre le mot tiré uniquement s'il n'a pas déjà été tiré
+            motTire.push(xml);
         }
-        x++;
     }
     
-    var y = motTire.indexOf(xml);
-    if (y == -1) {      // on enregistre le mot tiré uniquement s'il n'a pas déjà été tiré
-        motTire.push(xml);
-    }
-    
+    response = xml.split('');
     tableau(response);       // on lance la fonction avec le mot tiré
 }
 
@@ -125,25 +120,25 @@ function responseText(xhttp) {              /**** RECUPERATION REPONSE ****/
     var i = Math.floor(Math.random()*text.length);
     text[i] = text[i].trim();
     
-    response = text[i].split('');
     
-    if (motTire.length == 5) {
+    for (var z=0; z<motTire.length; i++) {
+        if (motTire[z] === text[i]) {
+            requestText('ecole.txt');
+        }
+    }
+    
+    if (motTire.length == 2) {
         finDuJeu();
     }
     
-    var x = 0;
-    while (x<motTire.length) {
-        if (motTire[x] == text[i]) {
-            requestText('ecole.txt');
+    if (motTire.length != 2) {
+        var y = motTire.indexOf(text[i]);
+        if (y == -1) {
+            motTire.push(text[i]);
         }
-        x++;
     }
-    
-    var y = motTire.indexOf(text[i]);
-    if (y == -1) {
-        motTire.push(text[i]);
-    }
-    
+
+    response = text[i].split('');
     tableau(response);
 }
 
