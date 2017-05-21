@@ -99,11 +99,11 @@ function reponseXML(xhttp, categorie) {     /**** RECUPERATION REPONSE ****/
         }
     }
     
-    if (motTire.length == 2) {
+    if (motTire.length == 20) {
         finDuJeu();
     }
     
-    if (motTire.length != 2) {
+    if (motTire.length < 20) {
         var y = motTire.indexOf(xml);
         if (y == -1) {      // on enregistre le mot tiré uniquement s'il n'a pas déjà été tiré
             motTire.push(xml);
