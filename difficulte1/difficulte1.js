@@ -52,8 +52,8 @@ function load() {       // fonction utilisé pour initialiser le code et l'affic
         var img = document.getElementById('img');       // on récupère l'ID de l'image (html)
         
         img.src = image.src;        // on applique l'image, puis les réductions
-        img.width = Math.round(image.width / reduction);
-        img.height = Math.round(image.height / reduction);
+        img.width = Math.round(image.width / reduction);          //width = Largeur
+        img.height = Math.round(image.height / reduction);          //height = Taille
     });
                 
     
