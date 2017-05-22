@@ -354,5 +354,7 @@ function affichageFinPendu() {
 
     if (motTire.length == 0) {	// on arrête l'intervalle quand l'array est vide
         clearInterval(interval);
+	    
+	     document.getElementById("quitter").style.display = "inline";
     }
 }
