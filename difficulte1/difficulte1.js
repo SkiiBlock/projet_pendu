@@ -356,5 +356,6 @@ function affichageFinPendu() {
         clearInterval(interval);
 	    
 	     document.getElementById("quitter").style.display = "inline";
+	     document.getElementById("rejouer").style.display = "inline";
     }
 }
