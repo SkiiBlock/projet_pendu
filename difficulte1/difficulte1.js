@@ -52,8 +52,8 @@ function load() {       // fonction utilisé pour initialiser le code et l'affic
         var img = document.getElementById('img');       // on récupère l'ID de l'image (html)
         
         img.src = image.src;        // on applique l'image, puis les réductions
-        img.width = Math.round(image.width / reduction);          //width = Largeur
-        img.height = Math.round(image.height / reduction);          //height = Taille
+        img.width = Math.round(image.width / reduction);
+        img.height = Math.round(image.height / reduction);
     });
                 
     
@@ -100,7 +100,7 @@ function reponseXML(xhttp, categorie) {     /**** RECUPERATION REPONSE (méthode
         motTire.push(xml);
     }
     
-    if (motTire.length == 10) {                 // si la liste est de 10 mots, on lance la fin du jeu
+    if (motTire.length == 11) {                 // si la liste est de 10 mots, on lance la fin du jeu
         finDuJeu();
     }
     
@@ -121,7 +121,7 @@ function responseText(xhttp) {              /**** RECUPERATION REPONSE (méthode
         motTire.push(t);
     }
     
-    if (motTire.length == 10) {                 // si la liste est de 10 mots, on lance la fin du jeu
+    if (motTire.length == 11) {                 // si la liste est de 10 mots, on lance la fin du jeu
         finDuJeu();
     }
 
@@ -146,13 +146,19 @@ function grabId() {    /**** RECUPERATION LETTRE ****/
 	var targ = e.target || e.srcElement;   // .target fait référence à l'objet
     
     var x = targ.innerHTML;
-    rechercheLettre(x);    
+    rechercheLettre(x);
+    
+    var audio = new Audio('../Image/2006.mp3');
+    audio.play();
 }
 
 window.onkeydown = function(e) {        /**** RECUPERATION LETTRE (CLAVIER) ****/
     var x = e.which;            // .which renvoie le code la touche
     var y = alphabet[(x-65)];       // on adapte le code à la variable alphabet
     rechercheLettre(y);
+    
+    var audio = new Audio('../Image/2006.mp3');
+    audio.play();
 }
 
 function rechercheLettre(x) {       /**** RECHERCHE LETTRE DANS MOT TIRE ****/
@@ -227,39 +233,42 @@ function suppressionLettre(x) {                 // Suppresion lettre dans 'table
     var tableau = document.getElementById('table').getElementsByTagName('td');
     
     for (var i=0; i<tableau.length; i++) {
-        if (tableau[i].innerHTML == x) {
+        if (tableau[i].innerHTML == x) {	// si la lettre tirée est égale à la lettre du tableau, on la supprime
             tableau[i].innerHTML = '';
         }
     }
 }
 
-function win() {
-    var textJS = document.getElementById('textJS');
+function win() {	/**** MOT TROUVE ****/
+    var textJS = document.getElementById('textJS');	// on récupère la zone de texte et on écrit
     textJS.innerHTML = "Tu as trouvé le mot !";
     textJS.style.color = 'green';
     
-    setTimeout(function reset() {
-        var tableau = document.getElementById('table');
+    setTimeout(function reset() {	// au bout de 2s, on lance la fonction
+        var tableau = document.getElementById('table');		// on efface le tableau
         textJS.innerHTML = '';
         
-        coups = 0;
+        coups = 0;	// reset des variables
         pinTable = [];
         response = [];
-        bResponse++;
+        bResponse++;	// on ajoute 1 au nb de bonne réponse
     
         tableau.deleteRow(-1);
         tableau.deleteRow(-1);
-        load();        
+        load();        // on relance la fonction 'load()'
     }, 2000);
     
-    corrige.push('1');
+    corrige.push('1');	// on ajoute 0 à l'array 'corrige'
+    
+    var audio = new Audio('../Image/2003.mp3');		// son de victoire
+    audio.play();
     
     if (motTire.length == 20) {                 // si la liste est de 20 mots, on lance la fin du jeu
         finDuJeu();
     }
 }
 
-function loose() {
+function loose() {	/**** MOT NON TROUVE ****/
     var textJS = document.getElementById('textJS');
     textJS.innerHTML = "Tu n'as pas trouvé le mot !";
     textJS.style.color = 'red';
@@ -277,23 +286,23 @@ function loose() {
         load();
     }, 2000);
     
-    corrige.push('0');
+    corrige.push('0');	// on ajoute 1 à l'array 'corrige'
     
     if (motTire.length == 20) {                 // si la liste est de 20 mots, on lance la fin du jeu
         finDuJeu();
     }
 }
 
-function finDuJeu() {
+function finDuJeu() {	/**** FIN DE LA PARTIE ****/
     var x = document.getElementById('info').innerHTML;
     
-    var textJS = document.getElementById('textJS');
+    var textJS = document.getElementById('textJS');	// on récupère le nombre de bonne réponse et le thème et on l'affiche
     textJS.innerHTML = "Tu as terminé le thème " + x + '<br>';
     textJS.innerHTML += "Tu as "+ bResponse +" bonnes réponses sur 10";
     textJS.style.color = 'green';
     
     //console.log(motTire);
-    interval = setInterval(affichageFinPendu, 2000);
+    interval = setInterval(affichageFinPendu, 2000);	// on lance la fonction 'affichageFinPendu' toutes les 2s
     
 }
 
@@ -301,34 +310,49 @@ function affichageFinPendu() {
     var tableau = document.getElementById('affichageMot')//.getElementsByTagName('td');
     tableau.deleteRow(-1);
     
-    var z = motTire[0].split('');
-    console.log(z);
+    var image = new Image();        // on créé une nouvelle image js 
+    image.src = '../Image/9.png';
+    
+    image.addEventListener('load', function() {
+        var reduction = 9;      // coefficient réducteur pour l'image
+        var img = document.getElementById('img');       // on récupère l'ID de l'image (html)
+        
+        img.src = image.src;        // on applique l'image, puis les réductions
+        img.width = Math.round(image.width / reduction);
+        img.height = Math.round(image.height / reduction);
+    });
+    
+    var table = document.getElementById('table');	// on efface le tableau alphabet
+    table.deleteRow(-1);
+    table.deleteRow(-1);
+    
+    var z = motTire[0].split('');	// on récupère le 1e mot de l'array et on le découpe
     var ligne = tableau.insertRow(-1);
-    for (var i=0; i<z.length; i++) {
+    for (var i=0; i<z.length; i++) {	// on créé le tableau en fonction de la longueur du mot
         var colonne = ligne.insertCell(i);
         colonne.innerHTML = '';
     }
-    var table = tableau.getElementsByTagName('td');
+    var table = tableau.getElementsByTagName('td');	// on affiche le mot
     for (var i=0; i<table.length; i++) {
         table[i].innerHTML = z[i];
     }
-    motTire.shift();
+	
+    motTire.shift();	// on retire le mot de l'array
     
-    var y = corrige[0];
+    var y = corrige[0];	// on récupère le code corrigé correspondant
     var x = document.getElementById('ecranJeu');
     
-    if (y == 0) {
+    if (y == 0) {	// si le corrige est 0, on affiche en rouge
         x.style.color = 'red';
     }
     
-    if (y == 1) {
+    if (y == 1) {	// si le corrige est 1, on affiche en vert
         x.style.color = 'green';
     }
     
-    corrige.shift();
-    
-    console.log(motTire.length);
-    if (motTire.length == 0) {
+    corrige.shift();	// on retire le nombre de l'array
+
+    if (motTire.length == 0) {	// on arrête l'intervalle quand l'array est vide
         clearInterval(interval);
     }
 }
