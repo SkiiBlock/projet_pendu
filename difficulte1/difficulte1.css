@@ -82,11 +82,12 @@ div {
   padding: 20px;
   cursor: pointer; /*Changer la forme du curseur lors survole*/
   margin: 10px;
-  width: 200px;
+  width: 300px;
   outline: none;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 20px;
+  margin-right: 10px;
   margin-top: 50px;
+    
     
 	
 }
@@ -117,9 +118,10 @@ div {
   right: 0;
 }
 
-#quitter {
+#quitter, #rejouer {
     
    display: none;
+  /* display: inline;*/
     
 }
 
