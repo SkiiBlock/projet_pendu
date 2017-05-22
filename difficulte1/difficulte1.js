@@ -260,7 +260,7 @@ function win() {	/**** MOT TROUVE ****/
     
     corrige.push('1');	// on ajoute 0 à l'array 'corrige'
     
-    var audio = new Audio('../Image/2003.mp3');		// son de victoire
+    var audio = new Audio('../Image/2020.mp3');		// son de victoire
     audio.play();
     
     if (motTire.length == 20) {                 // si la liste est de 20 mots, on lance la fin du jeu
